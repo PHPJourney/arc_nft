@@ -165,11 +165,11 @@
                                                 </div>
                                                 <div class="row">
                                                     <q-item class="col-4 justify-end">Amount:</q-item>
-                                                    <q-item class="col-8">{{ assetId.amount }}</q-item>
+                                                    <q-item class="col-8">{{ (assetId.amount / Math.pow(10, assetId.decimal)).toFixed(assetId.decimal) }}</q-item>
                                                 </div>
                                                 <div class="row">
                                                     <q-item class="col-4 justify-end">Supply:</q-item>
-                                                    <q-item class="col-8">{{ assetId.total }}</q-item>
+                                                    <q-item class="col-8">{{ (assetId.total / Math.pow(10, assetId.decimal)).toFixed(assetId.decimal) }}</q-item>
                                                 </div>
                                                 <div class="row">
                                                     <q-item class="col-4 justify-end">is-Frozen:</q-item>
@@ -285,11 +285,11 @@
                                                 </div>
                                                 <div class="row">
                                                     <q-item class="col-4 justify-end">Amount:</q-item>
-                                                    <q-item class="col-8">{{ assetId.amount }}</q-item>
+                                                    <q-item class="col-8">{{ (assetId.amount / Math.pow(10, assetId.decimal)).toFixed(assetId.decimal) }}</q-item>
                                                 </div>
                                                 <div class="row">
                                                     <q-item class="col-4 justify-end">Supply:</q-item>
-                                                    <q-item class="col-8">{{ assetId.total }}</q-item>
+                                                    <q-item class="col-8">{{ (assetId.total / Math.pow(10, assetId.decimal)).toFixed(assetId.decimal) }}</q-item>
                                                 </div>
                                                 <div class="row">
                                                     <q-item class="col-4 justify-end">is-Frozen:</q-item>
@@ -393,11 +393,11 @@
                                                 </div>
                                                 <div class="row">
                                                     <q-item class="col-4 justify-end">Amount:</q-item>
-                                                    <q-item class="col-8">{{ assetId.amount }}</q-item>
+                                                    <q-item class="col-8">{{ (assetId.amount / Math.pow(10, assetId.decimal)).toFixed(assetId.decimal) }}</q-item>
                                                 </div>
                                                 <div class="row">
                                                     <q-item class="col-4 justify-end">Supply:</q-item>
-                                                    <q-item class="col-8">{{ assetId.total }}</q-item>
+                                                    <q-item class="col-8">{{ (assetId.total / Math.pow(10, assetId.decimal)).toFixed(assetId.decimal) }}</q-item>
                                                 </div>
                                                 <div class="row">
                                                     <q-item class="col-4 justify-end">is-Frozen:</q-item>
