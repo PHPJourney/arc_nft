@@ -9,7 +9,7 @@ export interface Meta {
 export interface accountInfo {
   sk: Uint8Array;
   addr: string;
-  Amount: number;
+  Amount: number | string;
 }
 
 export interface Asset {
@@ -26,4 +26,6 @@ export interface Asset {
   clawback: string;
   freeze: string;
   metaurl: string;
+  label: string;
+  value: string;
 }

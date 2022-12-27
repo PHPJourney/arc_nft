@@ -548,6 +548,7 @@
 
 <script lang="ts">
 import { accountInfo, Asset } from 'components/models';
+import { copyToClipboard } from 'quasar';
 
 import { defineComponent, ref,PropType } from 'vue';
 
@@ -582,14 +583,16 @@ export default defineComponent({
         clawback: undefined,
         freeze: undefined
     });
+    const asset: Asset[] = [];
+    const assetId = ref(asset[0]);
     return {
         skeleton,
         tab: ref('Create'),
         splitterUpdateModel: ref(40),
         note:ref(''),
         splitterModel: ref(20),
-        assetId: ref(null),
-        asset: ref([]),
+        assetId,
+        asset,
         rekeyTo: ref(undefined),
         response: '',
         freeze: ref({
@@ -622,12 +625,12 @@ export default defineComponent({
     },
     async initAsset() {
       let balance = await this.$algod.balanceOf(this.account.addr);
-      balance.assets.map(d=> {
-          let params = balance['created-assets'][balance['created-assets'].findIndex(v=> v.index == d['asset-id'])];
+      balance.assets.map((d:any)=> {
+          let params = balance['created-assets'][balance['created-assets'].findIndex((v:any)=> v.index == d['asset-id'])];
           console.log(params);
           if(params) {
               this.asset.push({
-                  id: d['asset-id'],
+                  id: params.index,
                   amount: d.amount,
                   unitName: params.params['unit-name'],
                   frozen: d['is-frozen'],
@@ -715,7 +718,7 @@ export default defineComponent({
     },
     async freezeToken() {
         this.skeleton.qtoolbar = true;
-        if(this.assetId.id == '') {
+        if(this.assetId.id <= 0) {
             this.showMsg('id is required.');
             this.skeleton.qtoolbar = false;
             return false;
@@ -742,7 +745,7 @@ export default defineComponent({
     },
     async destoryToken() {
         this.skeleton.qtoolbar = true;
-        if(this.assetId.id == '') {
+        if(this.assetId.id <= 0) {
             this.showMsg('id is required.');
             this.skeleton.qtoolbar = false;
             return false;
@@ -770,7 +773,7 @@ export default defineComponent({
     },
     async transferToken() {
         this.skeleton.qtoolbar = true;
-        if(this.assetId.id == '') {
+        if(this.assetId.id <= 0) {
             this.showMsg('id is required.');
             this.skeleton.qtoolbar = false;
             return false;
@@ -801,7 +804,7 @@ export default defineComponent({
     },
     async updateToken() {
         this.skeleton.qtoolbar = true;
-        if(this.assetId.id == '') {
+        if(this.assetId.id <= 0) {
             this.showMsg('id is required.');
             this.skeleton.qtoolbar = false;
             return false;
@@ -830,7 +833,7 @@ export default defineComponent({
             this.$forceUpdate();
         }, 1500);
     },
-    showMsg(context) {
+    showMsg(context:string) {
         this.$q.dialog({
             dark: true,
             title: 'NFT ARC SDK Notice',

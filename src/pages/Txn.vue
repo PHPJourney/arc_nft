@@ -7,7 +7,7 @@
 <script lang="ts">
     import { accountInfo } from 'components/models';
 
-    import { defineComponent, ref } from 'vue';
+    import { defineComponent, ref, PropType } from 'vue';
 
     export default defineComponent({
         name: 'PageTxn',
@@ -22,7 +22,7 @@
         },
         methods: {
             create(info: accountInfo) {
-                this.account = info;
+                this.$emit('updateAccount', info);
             }
         }
     });
