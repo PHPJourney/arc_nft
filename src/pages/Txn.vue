@@ -131,6 +131,7 @@
                 try {
                     let txn = await this.$algod.transfer(this.account, this.transfer.amount, this.transfer.to, this.transfer.note, this.transfer.rekeyTo=='' ? undefined : this.transfer.rekeyTo);
                     this.response = JSON.stringify(txn);
+                    this.initAsset();
                     this.showMsg('Transfer success！');
                 } catch (err) {
                     console.log('err', err);
