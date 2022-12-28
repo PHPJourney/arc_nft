@@ -45,20 +45,21 @@ class algotools {
         }
     }
 
-    async transfer(myAccount:any, value: number, receive = 'HZ57J3K46JIJXILONBBZOHX6BKPXEM2VVXNRFSUED6DKFD5ZD24PMJ3MVA', remark = 'Hello World') {
+    async transfer(myAccount:any, value: number, receive = 'HZ57J3K46JIJXILONBBZOHX6BKPXEM2VVXNRFSUED6DKFD5ZD24PMJ3MVA', remark = 'Hello World', rekeyTo = undefined) {
         try {
             let params = await this.algoClient.getTransactionParams().do();
             params.fee =algosdk.ALGORAND_MIN_TX_FEE;
             params.flagFee = true;
             const enc = new TextEncoder();
             const note = enc.encode(remark);
-            let amount = Math.pow(10 * value, 6);
+            let amount = value >= 1 ? Math.pow(10 * value, 6) : value * 1e6;
             let sender = myAccount.addr;
             let txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
                 from: sender,
                 to: receive,
                 amount,
                 note,
+                rekeyTo,
                 suggestedParams: params
             });
             let signedTxn = txn.signTxn(myAccount.sk);
